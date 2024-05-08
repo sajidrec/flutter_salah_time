@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -6,6 +7,7 @@ import 'package:salah_time/data/models/home_page_model.dart';
 import 'package:salah_time/data/models/waqt_model.dart';
 import 'package:salah_time/data/services/network_caller.dart';
 import 'package:salah_time/presentation/widgets/location_not_found_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreenController extends GetxController {
   String _currentTime = DateFormat().add_jm().format(DateTime.now());
@@ -49,6 +51,28 @@ class HomeScreenController extends GetxController {
       HomePageModel.salahScheduleList = waqtList;
 
       HomePageModel.noDataToShow = false;
+
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
+      // TODO: add query-name in sharedPref...
+
+      if (sharedPreferences.getStringList("history") != null) {
+
+        final List<String> newListForAddition = sharedPreferences.getStringList(
+          "history",
+        )!;
+
+        newListForAddition.insert(0, jsonEncode(data["items"]));
+
+        sharedPreferences.setStringList("history", newListForAddition);
+      } else {
+        sharedPreferences.setStringList("history", [
+          jsonEncode(data["items"]),
+        ]);
+      }
+
+      print("sajid testing -> ${sharedPreferences.getStringList("history")}");
     } else {
       locationNotFoundAlert();
     }
