@@ -52,27 +52,7 @@ class HomeScreenController extends GetxController {
 
       HomePageModel.noDataToShow = false;
 
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-
-      // TODO: add query-name in sharedPref...
-
-      if (sharedPreferences.getStringList("history") != null) {
-
-        final List<String> newListForAddition = sharedPreferences.getStringList(
-          "history",
-        )!;
-
-        newListForAddition.insert(0, jsonEncode(data["items"]));
-
-        sharedPreferences.setStringList("history", newListForAddition);
-      } else {
-        sharedPreferences.setStringList("history", [
-          jsonEncode(data["items"]),
-        ]);
-      }
-
-      print("sajid testing -> ${sharedPreferences.getStringList("history")}");
+      await _saveHistoryInLocalStorage(data);
     } else {
       locationNotFoundAlert();
     }
@@ -86,5 +66,30 @@ class HomeScreenController extends GetxController {
       _currentTime = DateFormat().add_jm().format(DateTime.now());
       update();
     });
+  }
+
+  Future<void> _saveHistoryInLocalStorage(dynamic data) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    List<String> currentData = [];
+
+    currentData.add(jsonEncode(data["query"]).toString());
+    currentData.add(jsonEncode(data["items"][0]).toString());
+
+    if ((sharedPreferences.getStringList("history")?.length ?? 0) > 0) {
+      final List<String> newListForAddition = sharedPreferences.getStringList(
+        "history",
+      )!;
+
+      newListForAddition.insert(0, currentData[1]); // place name
+      newListForAddition.insert(0, currentData[0]); // data object
+
+      await sharedPreferences.setStringList("history", newListForAddition);
+    } else {
+      await sharedPreferences.setStringList(
+        "history",
+        currentData,
+      );
+    }
   }
 }

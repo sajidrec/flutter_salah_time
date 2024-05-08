@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:salah_time/presentation/controllers/search_history_screen_controller.dart';
 import 'package:salah_time/presentation/utils/app_colors.dart';
 
 void deleteAllHistoryConfirmDialog({required String message}) {
@@ -10,16 +11,22 @@ void deleteAllHistoryConfirmDialog({required String message}) {
       content: Row(
         children: [
           const Spacer(),
-          ElevatedButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(
-                primaryAppTextColor,
+          GetBuilder<SearchHistoryScreenController>(
+              builder: (searchHistoryScreenController) {
+            return ElevatedButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(
+                  primaryAppTextColor,
+                ),
+                backgroundColor: MaterialStateProperty.all(Colors.red),
               ),
-              backgroundColor: MaterialStateProperty.all(Colors.red),
-            ),
-            onPressed: () {},
-            child: const Text("YES"),
-          ),
+              onPressed: () async {
+                await searchHistoryScreenController.clearAllHistory();
+                Get.back();
+              },
+              child: const Text("YES"),
+            );
+          }),
           const Spacer(),
           ElevatedButton(
             style: ButtonStyle(
