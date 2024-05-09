@@ -11,30 +11,29 @@ class SearchHistoryScreenController extends GetxController {
 
   Future<void> getListOfHistory() async {
     _listOfHistory.clear();
-    // TODO: fix listofhistory
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     if (sharedPreferences.getStringList("history") != null) {
       for (int i = 0;
-          i < (sharedPreferences.getStringList("history")!.length / 2);
-          i++) {
+          i < (sharedPreferences.getStringList("history")!.length);
+          i += 2) {
         HistoryElementModel newHistory = HistoryElementModel(
-          placeName: sharedPreferences.getStringList("history")![0],
+          placeName: sharedPreferences.getStringList("history")![i],
           date: jsonDecode(
-              sharedPreferences.getStringList("history")![1])["date_for"],
+              sharedPreferences.getStringList("history")![i + 1])["date_for"],
           fajr: jsonDecode(
-              sharedPreferences.getStringList("history")![1])["fajr"],
+              sharedPreferences.getStringList("history")![i + 1])["fajr"],
           shurooq: jsonDecode(
-              sharedPreferences.getStringList("history")![1])["shurooq"],
+              sharedPreferences.getStringList("history")![i + 1])["shurooq"],
           dhuhr: jsonDecode(
-              sharedPreferences.getStringList("history")![1])["dhuhr"],
-          asr:
-              jsonDecode(sharedPreferences.getStringList("history")![1])["asr"],
+              sharedPreferences.getStringList("history")![i + 1])["dhuhr"],
+          asr: jsonDecode(
+              sharedPreferences.getStringList("history")![i + 1])["asr"],
           maghrib: jsonDecode(
-              sharedPreferences.getStringList("history")![1])["maghrib"],
+              sharedPreferences.getStringList("history")![i + 1])["maghrib"],
           isha: jsonDecode(
-              sharedPreferences.getStringList("history")![1])["isha"],
+              sharedPreferences.getStringList("history")![i + 1])["isha"],
         );
 
         _listOfHistory.add(newHistory);
