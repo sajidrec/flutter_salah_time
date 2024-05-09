@@ -93,6 +93,7 @@ class _SearchHistoryScreenState extends State<SearchHistoryScreen> {
                                 deleteHistoryElementConfirmDialog(
                                   message:
                                       "You sure want to delete this history?",
+                                  index: index,
                                 );
                               },
                               icon: const Icon(

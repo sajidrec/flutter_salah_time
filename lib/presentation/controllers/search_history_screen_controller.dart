@@ -35,9 +35,9 @@ class SearchHistoryScreenController extends GetxController {
           isha: jsonDecode(
               sharedPreferences.getStringList("history")![i + 1])["isha"],
         );
-
         _listOfHistory.add(newHistory);
       }
+
       update();
     }
   }
@@ -46,6 +46,21 @@ class SearchHistoryScreenController extends GetxController {
     SharedPreferences sharedPreference = await SharedPreferences.getInstance();
     await sharedPreference.remove("history");
     _listOfHistory.clear();
+    update();
+  }
+
+  Future<void> clearSpecificSearchHistory({required int index}) async {
+    SharedPreferences sharedPreference = await SharedPreferences.getInstance();
+    List<String> currentList = sharedPreference.getStringList("history")!;
+
+    _listOfHistory.removeAt(index);
+
+    currentList.removeAt(index * 2);
+    currentList.removeAt(index * 2);
+
+    await sharedPreference.setStringList("history", currentList);
+    currentList.clear();
+
     update();
   }
 }
