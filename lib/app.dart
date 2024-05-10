@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:salah_time/controller_binder.dart';
-import 'package:salah_time/presentation/screens/home_screen.dart';
+import 'package:salah_time/presentation/screens/splash_screen.dart';
 import 'package:salah_time/presentation/utils/app_colors.dart';
 
 class SalahTimeApp extends StatelessWidget {
@@ -10,7 +10,7 @@ class SalahTimeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: const HomeScreen(),
+      home: const SplashScreen(),
       initialBinding: ControllerBinder(),
       theme: ThemeData(
         inputDecorationTheme: InputDecorationTheme(

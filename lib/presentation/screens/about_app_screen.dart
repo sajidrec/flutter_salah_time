@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:salah_time/presentation/widgets/create_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
