@@ -24,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: double.maxFinite,
         color: primaryAppColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -63,6 +64,6 @@ class _SplashScreenState extends State<SplashScreen> {
 }
 
 Future<void> _moveToNextScreen() async {
-  await Future.delayed(const Duration(seconds: 2));
-  Get.off(const HomeScreen());
+  await Future.delayed(const Duration(milliseconds: 2300));
+  Get.off(() => const HomeScreen());
 }

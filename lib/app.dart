@@ -10,6 +10,7 @@ class SalahTimeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       initialBinding: ControllerBinder(),
       theme: ThemeData(
