@@ -62,7 +62,7 @@ class HomeScreenController extends GetxController {
   }
 
   startClock() {
-    Timer.periodic(const Duration(minutes: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       _currentTime = DateFormat().add_jm().format(DateTime.now());
       update();
     });
