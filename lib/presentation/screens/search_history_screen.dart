@@ -19,7 +19,9 @@ class _SearchHistoryScreenState extends State<SearchHistoryScreen> {
   @override
   void initState() {
     super.initState();
-    _searchHistoryScreenController.getListOfHistory();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) => _searchHistoryScreenController.getListOfHistory(),
+    );
   }
 
   @override
@@ -34,18 +36,28 @@ class _SearchHistoryScreenState extends State<SearchHistoryScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              IconButton(
-                color: Colors.red,
-                onPressed: () {
-                  deleteAllHistoryConfirmDialog(
-                    message: "You sure want to clear all history?",
-                  );
-                },
-                icon: const Icon(
-                  Icons.delete_forever_rounded,
-                  size: 35,
-                ),
-              ),
+              GetBuilder<SearchHistoryScreenController>(
+                  builder: (searchHistoryScreenController) {
+                return searchHistoryScreenController.listOfHistory?.length <= 0
+                    ? Center(
+                        child: Text(
+                          "Nothing in history",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      )
+                    : IconButton(
+                        color: Colors.red,
+                        onPressed: () {
+                          deleteAllHistoryConfirmDialog(
+                            message: "You sure want to clear all history?",
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.delete_forever_rounded,
+                          size: 35,
+                        ),
+                      );
+              }),
               const SizedBox(
                 height: 8,
               ),
