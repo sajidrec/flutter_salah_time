@@ -17,10 +17,10 @@ SizedBox createDrawerElement({
           Get.to(nextScreen);
         },
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
+          backgroundColor: WidgetStateProperty.all(
             primaryAppColor,
           ),
-          foregroundColor: MaterialStateProperty.all(
+          foregroundColor: WidgetStateProperty.all(
             primaryAppTextColor,
           ),
         ),

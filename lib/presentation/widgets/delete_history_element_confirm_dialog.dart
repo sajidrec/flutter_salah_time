@@ -18,10 +18,10 @@ void deleteHistoryElementConfirmDialog({
               builder: (searchHistoryScreenController) {
             return ElevatedButton(
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(
+                foregroundColor: WidgetStateProperty.all(
                   primaryAppTextColor,
                 ),
-                backgroundColor: MaterialStateProperty.all(Colors.red),
+                backgroundColor: WidgetStateProperty.all(Colors.red),
               ),
               onPressed: () async {
                 await searchHistoryScreenController.clearSpecificSearchHistory(
@@ -35,10 +35,10 @@ void deleteHistoryElementConfirmDialog({
           const Spacer(),
           ElevatedButton(
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(
+              foregroundColor: WidgetStateProperty.all(
                 primaryAppTextColor,
               ),
-              backgroundColor: MaterialStateProperty.all(
+              backgroundColor: WidgetStateProperty.all(
                 primaryAppColor,
               ),
             ),

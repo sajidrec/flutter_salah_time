@@ -16,8 +16,8 @@ void locationNotFoundAlert() {
       backgroundColor: primaryAppTextColor,
       content: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.red),
-          foregroundColor: MaterialStateProperty.all(primaryAppTextColor),
+          backgroundColor: WidgetStateProperty.all(Colors.red),
+          foregroundColor: WidgetStateProperty.all(primaryAppTextColor),
         ),
         onPressed: () {
           Get.back();

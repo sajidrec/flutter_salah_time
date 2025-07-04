@@ -134,7 +134,7 @@ class PopupSearchElement extends StatelessWidget {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.red),
+                              WidgetStateProperty.all(Colors.red),
                         ),
                         onPressed: () {
                           Get.back();
